@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>robotframework-maven</groupId>
+  <artifactId>robotframework-maven</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>robobtframework-maven</name>
+  <build>
+  <plugins>
+  <plugin>
+        <groupId>org.robotframework</groupId>
+        <artifactId>robotframework-maven-plugin</artifactId>
+        <version>1.7.2</version>
+        <configuration>
+			      <xunitFile>target/robotframework-reports/xunit.xml</xunitFile>
+            <argumentFile>src/test/resources/config/runtime.args</argumentFile>
+            <!-- <tests>${bamboo_testsToRunConverted}</tests> -->
+		</configuration>  
+        <executions>
+          <execution>
+            <goals>
+               <goal>acceptance-test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+            <groupId>net.sf.mavenjython</groupId>
+            <artifactId>jython-compile-maven-plugin</artifactId>
+            <version>2.0</version>
+            <executions>
+                   <execution>
+                          <phase>package</phase>
+                          <goals>
+                               <goal>jython</goal>
+                          </goals>
+                   </execution>
+            </executions>
+            <configuration>
+                  <libraries>
+                        <param>rbf</param>
+                  </libraries>
+            </configuration>
+      </plugin>
+    </plugins>
+    </build>
+<distributionManagement>
+    <snapshotRepository>
+        <id>ossrh</id>
+        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+        <id>ossrh</id>
+        <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+</distributionManagement>
+</project>
